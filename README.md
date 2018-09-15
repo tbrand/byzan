@@ -1,8 +1,8 @@
-<h1 align="center">
+<h1 align="right">
   <img src="https://user-images.githubusercontent.com/3483230/45586645-ee774800-b935-11e8-971e-3a72e71db9ba.jpg" />
 </h1>
 
-<p align="center">
+<p align="right">
   <i>Distributed blockchain KVS with high availability written in Rust.</i>
 </p>
 
