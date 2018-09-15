@@ -25,6 +25,7 @@ jobs:
     steps:
       - checkout
       - run: sudo apt-get update -y && sudo apt-get install cmake golang -y
+      - run: rustup default nightly
       - run: cargo bench
 
   docker-build:
