@@ -21,7 +21,7 @@ jobs:
 
   bench-e2e:
     docker:
-      - image: circleci:rust:latest
+      - image: circleci/rust:latest
     steps:
       - checkout
       - run: apt-get update -y && apt-get install cmake golang -y
