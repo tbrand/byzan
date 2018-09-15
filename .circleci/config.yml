@@ -3,14 +3,16 @@ version: 2
 jobs:
   
   build:
-    docker: circleci/rust:latest
+    docker:
+      - image: circleci/rust:latest
     steps:
       - checkout
       - run: |
           cargo build --release
 
   test:
-    docker: circleci/rust:latest
+    docker:
+      - image: circleci/rust:latest
     steps:
       - checkout
       - run: |
