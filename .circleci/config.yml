@@ -3,25 +3,42 @@ version: 2
 jobs:
   
   build:
-    docker: circleci/rust:latest
+    docker:
+      - image: circleci/rust:latest
     steps:
       - checkout
-      - run: |
-          cargo build --release
+      - run: sudo apt-get update -y && sudo apt-get install cmake golang -y
+      - run: cargo build --release
 
   test:
-    docker: circleci/rust:latest
+    docker:
+      - image: circleci/rust:latest
     steps:
       - checkout
-      - run: |
-          cargo test
+      - run: sudo apt-get update -y && sudo apt-get install cmake golang -y
+      - run: cargo test
+
+
+  bench-e2e:
+    docker:
+      - image: circleci/rust:latest
+    steps:
+      - checkout
+      - run: sudo apt-get update -y && sudo apt-get install cmake golang -y
+      - run: rustup default nightly
+      - run: cargo bench
 
   docker-build:
     machine: true
     steps:
       - checkout
-      - run: |
-          docker build . -t byzan
+      - run: docker build . -t byzan
+
+  docker-deploy:
+    machine: true
+    steps:
+      - checkout
+      - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
 
 workflows:
   version: 2
@@ -30,4 +47,16 @@ workflows:
     jobs:
       - build
       - test
+      - bench-e2e
       - docker-build
+      - docker-deploy:
+          requires:
+            - build
+            - test
+            - bench-e2e
+            - docker-build
+          filters:
+            branches:
+              only: master
+            tags:
+              only: /^[0-9]+\.[0-9]+\.[0-9]+$/
