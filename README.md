@@ -13,7 +13,7 @@
 ## How to use blockchain?
 
 Core technology of blockchain is not for the currency but for the consensus algorithm.
-Byzan uses the blockchain feature.
+Byzan uses the blockchain feature for keeping data consisntency between distributed nodes.
 
 ### Why no miners?
 
@@ -22,9 +22,7 @@ So it's not needed to make some intervals but just verifying the block hash is e
 
 ## API
 
-All APIs are defined as gRPC. You can find the definition at `/proto` directory.
-
-<i>TODO</i>
+All APIs are defined as gRPC. You can find the definition at [/proto](https://github.com/tbrand/byzan/tree/master/proto) directory.
 
 ## Development
 
