@@ -1,0 +1,33 @@
+version: 2
+
+jobs:
+  
+  build:
+    docker: circleci/rust:latest
+    steps:
+      - checkout
+      - run: |
+          cargo build --release
+
+  test:
+    docker: circleci/rust:latest
+    steps:
+      - checkout
+      - run: |
+          cargo test
+
+  docker-build:
+    machine: true
+    steps:
+      - checkout
+      - run: |
+          docker build . -t byzan
+
+workflows:
+  version: 2
+
+  pull_request:
+    jobs:
+      - build
+      - test
+      - docker-build

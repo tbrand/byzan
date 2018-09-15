@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+package byzan;
+
+service BlockChain {
+  rpc upsert(NewBlock) returns (ResponseBlock) {}
+  rpc push(Block) returns (ResponseBlock) {}
+  rpc get_by_key(BlockKey) returns (ResponseBlock) {}
+  rpc get_by_idx(BlockIdx) returns (ResponseBlock) {}
+  rpc get_by_id(BlockId) returns (ResponseBlock) {}
+  rpc last(Empty) returns (ResponseBlock) {}
+  rpc len(Empty) returns (ResponseLen) {}
+  rpc history(BlockKey) returns (ResponseBlocks) {}
+  rpc range(BlockRange) returns (ResponseBlocks) {}
+  rpc till(BlockTill) returns (ResponseBlocks) {}
+}
+
+message Empty {}
+
+message NewBlock {
+  string id = 1;
+  string key = 2;
+  string value = 3;
+}
+
+message Block {
+  uint32 idx = 1;
+  string id = 2;
+  string key = 3;
+  string value = 4;
+  string prev_hash = 5;
+  string self_hash = 6;
+}
+
+message BlockKey {
+  string key = 1;
+}
+
+message BlockIdx {
+  uint32 idx = 1;
+}
+
+message BlockId {
+  string id = 1;
+}
+
+message BlockRange {
+  uint32 first = 1;
+  uint32 last = 2;
+}
+
+message BlockTill {
+  uint32 first = 1;
+}
+
+message ResponseBlock {
+  string status = 1;
+  Block block = 2;
+}
+
+message ResponseBlocks {
+  string status = 1;
+  repeated Block blocks = 2;
+}
+
+message ResponseLen {
+  string status = 1;
+  uint32 len = 2;
+}

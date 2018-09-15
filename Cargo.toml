@@ -1,0 +1,27 @@
+[package]
+name = "byzd"
+version = "0.1.0"
+authors = ["tbrand <taichiro0709@gmail.com>"]
+
+[dependencies]
+serde = "*"
+serde_json = "*"
+serde_derive = "*"
+rust-crypto = "*"
+log = "*"
+env_logger = "*"
+grpcio = "*"
+protobuf= "*"
+futures = "*"
+lazy_static = "*"
+clap = "*"
+colored = "*"
+ws = "*"
+url = "*"
+rand = "*"
+rusqlite = "*"
+simplelog = "*"
+
+[dependencies.num]
+version = "*"
+features = ["rand"]
