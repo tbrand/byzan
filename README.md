@@ -8,7 +8,26 @@
 
 ## Quick start
 
-<i>TODO</i>
+You need rust (cargo) environment for building.
+
+After cloning this repo, build it by below.
+```bash
+cargo build --release
+```
+
+Launch a node with binding a gPRC port on 8000 and websocket port on 8001.
+```bash
+./target/release/byzd --bind_port=8000 --peer_port=8001
+```
+
+Upsert data and get it from it.
+```bash
+# Upsert data
+./target/release/byz --connect_port=8000 upsert -k mykey -v myvalue
+
+# Get it from the node
+./target/release/byz --connect_port=8000 get -k mykey
+```
 
 ## How to use blockchain?
 
