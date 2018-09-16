@@ -32,16 +32,15 @@ jobs:
     machine: true
     steps:
       - checkout
-      - run: docker build . -t byzan
+      - run: docker build . -t tbrand/byzan
 
   docker-deploy:
     machine: true
     steps:
       - checkout
-      - run: echo ${CIRCLE_TAG}
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
-      - run: docker build . -t tbrand/byzan:${CIRCLE_TAG}
-      - run: docker push tbrand/byzan:${CIRCLE_TAG}
+      - run: docker build . -t tbrand/byzan
+      - run: docker push tbrand/byzan:latest
 
 workflows:
   version: 2
@@ -61,5 +60,3 @@ workflows:
           filters:
             branches:
               only: master
-            tags:
-              only: /v.*/
