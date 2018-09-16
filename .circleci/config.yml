@@ -39,7 +39,7 @@ jobs:
     steps:
       - checkout
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
-      - run: docker build . -t tbrand/byzan
+      - run: docker build . -t tbrand/byzan:${CIRCLE_TAG}
       - run: docker push tbrand/byzan:${CIRCLE_TAG}
 
 workflows:
