@@ -1,7 +1,7 @@
 #![allow(dead_code)]
 extern crate clap;
 extern crate colored;
-extern crate crypto;
+extern crate ring;
 extern crate futures;
 extern crate grpcio;
 #[macro_use]

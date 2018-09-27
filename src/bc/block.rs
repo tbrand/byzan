@@ -1,7 +1,6 @@
 use bc::BlockChain;
-use crypto::digest::Digest;
-use crypto::sha2::Sha256;
 use proto::byzan;
+use ring::*;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Block {
@@ -84,9 +83,14 @@ impl Block {
         let prev_hash = self.prev_hash.clone();
         let content = format!("{}", self.idx) + &id + &key + &value + &prev_hash;
 
-        let mut sha256 = Sha256::new();
-        sha256.input_str(&content);
-        sha256.result_str()
+        let mut sha256 = digest::Context::new(&digest::SHA256);
+        sha256.update(content.as_bytes());
+        self.to_hex(sha256.finish().as_ref())
+    }
+
+    fn to_hex(&self, bytes: &[u8]) -> String {
+        let s: Vec<String> = bytes.to_vec().iter().map(|b| format!("{:02x}", b)).collect();
+        s.join("")
     }
 
     pub fn valid<T: BlockChain>(&self, blockchain: &T) -> Result<(), String> {
