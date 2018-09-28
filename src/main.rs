@@ -5,7 +5,6 @@ extern crate simplelog;
 #[macro_use]
 extern crate serde_derive;
 extern crate colored;
-extern crate crypto;
 extern crate futures;
 extern crate grpcio;
 extern crate protobuf;
@@ -14,6 +13,7 @@ extern crate serde_json;
 extern crate lazy_static;
 extern crate num;
 extern crate rand;
+extern crate ring;
 extern crate rusqlite;
 extern crate url;
 extern crate ws;
